@@ -1,0 +1,18 @@
+2017-07-30T21:44:06.476513131 0.426410s notice: Recursively removing directory /home/arthur/Documents/todo-2/rethinkdb_data/tmp
+2017-07-30T21:44:06.490277250 0.440172s notice: Initializing directory /home/arthur/Documents/todo-2/rethinkdb_data
+2017-07-30T21:44:06.490391402 0.440285s info: Creating a default database for your convenience. (This is because you ran 'rethinkdb' without 'create', 'serve', or '--join', and the directory '/home/arthur/Documents/todo-2/rethinkdb_data' did not already exist or is empty.)
+2017-07-30T21:44:06.490443819 0.440338s notice: Running rethinkdb 2.3.6~0xenial (GCC 5.3.1)...
+2017-07-30T21:44:06.497203872 0.447197s notice: Running on Linux 4.10.0-27-generic x86_64
+2017-07-30T21:44:06.497378625 0.447272s notice: Loading data from directory /home/arthur/Documents/todo-2/rethinkdb_data
+2017-07-30T21:44:06.620620045 0.570515s info: Automatically using cache size of 1792 MB
+2017-07-30T21:44:06.622118602 0.572013s notice: Listening for intracluster connections on port 29015
+2017-07-30T21:44:06.635689496 0.585584s notice: Listening for client driver connections on port 28015
+2017-07-30T21:44:06.636023279 0.585917s notice: Listening for administrative HTTP connections on port 8080
+2017-07-30T21:44:06.636027706 0.585921s notice: Listening on cluster addresses: 127.0.0.1, 127.0.1.1, ::1
+2017-07-30T21:44:06.636032365 0.585926s notice: Listening on driver addresses: 127.0.0.1, 127.0.1.1, ::1
+2017-07-30T21:44:06.636036176 0.585930s notice: Listening on http addresses: 127.0.0.1, 127.0.1.1, ::1
+2017-07-30T21:44:06.636040230 0.585934s notice: To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+2017-07-30T21:44:06.636047769 0.585942s notice: Server ready, "arthur_ThinkPad_X220_16w" 42599bc1-5aad-44b5-a4e0-5b2226928620
+2017-07-30T21:45:20.977402042 74.927296s info: Table 3cdf58d6-297f-4355-a1dd-8d498d8b8404: Starting a new Raft election for term 1.
+2017-07-30T21:45:20.977634966 74.927529s info: Table 3cdf58d6-297f-4355-a1dd-8d498d8b8404: Added replica on this server.
+2017-07-30T21:45:20.994282343 74.944177s info: Table 3cdf58d6-297f-4355-a1dd-8d498d8b8404: This server is Raft leader for term 1. Latest log index is 0.
