@@ -1,0 +1,16 @@
+.change-password-form, .logout-button {
+    margin-top: 15px;
+}
+
+.logout-button {
+    text-align: center;
+}
+
+.logout-button button {
+    width: 100%;
+    min-height: 100%;
+}
+
+.logout-button svg {
+    vertical-align: middle;
+}

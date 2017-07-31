@@ -4,6 +4,7 @@ import ActionInfo from 'material-ui/svg-icons/action/info';
 import Subheader from 'material-ui/Subheader';
 import { Link } from 'react-router-dom'
 import axios from 'axios';
+import './UrgentList.css'
 
 class UrgentList extends Component {
   constructor(props) {
@@ -26,7 +27,7 @@ class UrgentList extends Component {
         <Subheader>Tâches urgentes</Subheader>
         <List>
           {this.state.tasks.map((task) => (
-            <Link key={task.id} to={`/details/${task.id}`}>
+            <Link className="task-list-item"  key={task.id} to={`/details/${task.id}`}>
               <ListItem key={task.id} primaryText={task.task} rightIcon={<ActionInfo />} />
             </Link>
           ))}

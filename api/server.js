@@ -65,12 +65,23 @@ let connection = r.connect({
         })
     })
 
-    app.get('/details/:taskId', (req, res) => {
+    app.get('/details/:taskId',jwtExpress({ secret: secret }), (req, res) => {
         let id = req.params.taskId;
         r.table('tasks').filter({'id': id}).run(connection, (err, cursor) => {
             if (err) throw err
                 cursor.toArray((err, result) => {
                     return res.json(result);
+                })
+        })
+    })
+
+    app.get('/settings/:userId', (req, res) => {
+        let id = req.params.userId;
+        console.log(id);
+        r.table('users').filter({'id': id}).run(connection, (err, cursor) => {
+            if (err) throw err
+                cursor.toArray((err, result) => {
+                    return res.json(result)
                 })
         })
     })

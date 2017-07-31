@@ -16,6 +16,7 @@ class Details extends Component {
   }
 
   componentDidMount() {
+    axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token')
     axios.get(`http://localhost:9000/details/${this.state.taskId}`).then((response) => {
       this.setState({ taskDetails: response.data[0] })
     })

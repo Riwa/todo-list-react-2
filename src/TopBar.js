@@ -21,7 +21,7 @@ class TopBar extends Component {
                 <AppBar
                     title="Vos tâches"
                     iconElementRight={<IconButton className="top-bar-link"> <Link to="/add"><AddTaskButton color="white" /></Link></IconButton>} 
-                    iconElementLeft={<IconButton className="top-bar-link" onClick={this.previousScreen}><Link to="/"><HomeButton color="white" /></Link></IconButton>} 
+                    iconElementLeft={<IconButton className="top-bar-link" onClick={this.previousScreen}><Link to="/todo"><HomeButton color="white" /></Link></IconButton>} 
                     />
             </div>
         );

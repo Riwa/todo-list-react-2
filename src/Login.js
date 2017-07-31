@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import TextField from 'material-ui/TextField';
+import {Card, CardText, CardActions} from 'material-ui/Card'
 import RaisedButton from 'material-ui/RaisedButton'
 import axios from 'axios'
 
@@ -38,30 +39,36 @@ class Login extends Component {
             localStorage.setItem('token', response.data.token)
             localStorage.setItem('userId', response.data.id)
             this.props.history.push('/todo')
-        })
+        }).catch((error) => {
+            alert('NO')
+      })
     }
 
     render(){
         return(
             <div>
-            <div>
-                <TextField
-                    value={this.state.login.user}
-                    fullWidth={true}
-                    floatingLabelText="Nom d'utilisateur"
-                    onChange={this.handleChangeLogin}
-                />
-            </div>
-            <div>
-                <TextField
-                    value={this.state.login.password}
-                    type="password"
-                    fullWidth={true}
-                    floatingLabelText="Mot de passe"
-                    onChange={this.handleChangePassword}
-                />
-            </div>
-            <RaisedButton onClick={this.proceedToLogin} label="Se connecter" primary={true} />
+                <Card>
+                    <CardText>
+                        <TextField
+                            value={this.state.login.user}
+                            fullWidth={true}
+                            floatingLabelText="Nom d'utilisateur"
+                            onChange={this.handleChangeLogin}
+                        />
+
+
+                        <TextField
+                            value={this.state.login.password}
+                            type="password"
+                            fullWidth={true}
+                            floatingLabelText="Mot de passe"
+                            onChange={this.handleChangePassword}
+                        />
+                    </CardText>
+                    <CardActions>
+                    <RaisedButton onClick={this.proceedToLogin} label="Se connecter" primary={true} />
+                    </CardActions>
+                </Card>
             </div>
         )
     }
