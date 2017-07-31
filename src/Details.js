@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
 import IconButton from 'material-ui/IconButton';
 import BackButton from 'material-ui/svg-icons/navigation/arrow-back';
-import {Link} from 'react-router-dom'
 import FlatButton from 'material-ui/FlatButton';
 import axios from 'axios'
 
@@ -18,15 +17,13 @@ class Details extends Component {
 
   componentDidMount() {
     axios.get(`http://localhost:9000/details/${this.state.taskId}`).then((response) => {
-      console.log(response.data)
       this.setState({ taskDetails: response.data[0] })
-      console.log(this.state.taskDetails.task)
     })
   }
 
   completeTask(taskId) {
     axios.put(`http://localhost:9000/completeTask/${taskId}`).then((response) => {
-      let updateTask = Object.assign({}, this.state.taskDetails);
+      // let updateTask = Object.assign({}, this.state.taskDetails);
       this.componentDidMount();
     })
   }

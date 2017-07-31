@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { List, ListItem } from 'material-ui/List';
 import ActionInfo from 'material-ui/svg-icons/action/info';
-import IconButton from 'material-ui/IconButton';
 import Subheader from 'material-ui/Subheader';
 import { Link } from 'react-router-dom'
 import axios from 'axios'
@@ -16,6 +15,7 @@ class DoneList extends Component {
     }
   
   componentDidMount() {
+    axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token')
     axios.get('http://localhost:9000/done').then((response) =>{
       this.tasks = response.data;
       this.setState({tasks: this.tasks})

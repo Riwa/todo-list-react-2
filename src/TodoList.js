@@ -17,7 +17,8 @@ class TodoList extends Component {
 
 
   componentDidMount() {
-    axios.get('http://localhost:9000/').then((response) => {
+    axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token')
+    axios.get('http://localhost:9000/todo').then((response) => {
       this.tasks = response.data;
       this.setState({ tasks: this.tasks })
     })

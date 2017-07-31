@@ -14,6 +14,7 @@ class UrgentList extends Component {
     this.state = { tasks }
   }
   componentDidMount() {
+    axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token')
     axios.get('http://localhost:9000/urgent').then((response) => {
       this.tasks = response.data;
       this.setState({ tasks: this.tasks })

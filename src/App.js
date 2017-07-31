@@ -9,24 +9,39 @@ import Main from './Main'
 injectTapEventPlugin();
 
 class App extends Component {
-  constructor(props){
-    super(props);
-  }
+
   componentDidMount(){
-    console.log(this.props)
+    console.log(window.location)
   }
+
+  displayTopBar(){
+    let path = window.location.hash;
+    if(path !== '#/'){
+      return <MuiThemeProvider>
+          <TopBar />
+        </MuiThemeProvider>
+    }
+  }
+
+
+  displayBottomBar(){
+    let path = window.location.hash;
+    if(path !== '#/'){
+      return <MuiThemeProvider>
+          <BottomBar />
+        </MuiThemeProvider>
+    }
+  }
+
+
   render() {
     return (
       <div>
-        <MuiThemeProvider>
-          <TopBar />
-        </MuiThemeProvider>
+        {this.displayTopBar()}
         <MuiThemeProvider>
           <Main />
         </MuiThemeProvider>
-        <MuiThemeProvider>
-          <BottomBar />
-        </MuiThemeProvider>
+        {this.displayBottomBar()}
       </div>
     );
   }

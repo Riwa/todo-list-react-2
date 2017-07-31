@@ -1,19 +1,25 @@
 // Express
 let express = require('express')
 let app = express()
+let secret = 'd2532f46973f69d3152af9efda';
 
 let cors = require('cors');
 let bodyParser = require('body-parser');
 let logger = require('morgan');
 let helmet = require('helmet');
 
+let bcrypt = require('bcrypt');
+let jwt = require('jsonwebtoken');
+let jwtExpress = require('express-jwt');
+
 app.use(logger('dev'));
 app.use(require('cookie-parser')());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
-logger('tiny')
 app.use(helmet());
+
+let saltRounds = 10;
 
 let r = require('rethinkdb');
 
@@ -29,7 +35,7 @@ app.use(function (error, request, response, next) {
 let connection = r.connect({
     db: "tasks_manager" //your database
 }).then((connection) => {
-    app.get('/', (req, res) => {
+    app.get('/todo',jwtExpress({ secret: secret }), (req, res) => {
         r.table('tasks').filter({completed: false}).run(connection, (err, cursor) => {
             if (err) throw err
             cursor.toArray((err, result) => {
@@ -39,7 +45,7 @@ let connection = r.connect({
         })
     })
 
-    app.get('/done', (req, res) => {
+    app.get('/done',jwtExpress({ secret: secret }), (req, res) => {
         r.table('tasks').filter({completed: true}).run(connection, (err, cursor) => {
             if (err) throw err
             cursor.toArray((err, result) => {
@@ -49,7 +55,7 @@ let connection = r.connect({
         })
     })
 
-    app.get('/urgent', (req, res) => {
+    app.get('/urgent',jwtExpress({ secret: secret }), (req, res) => {
         r.table('tasks').filter({priority: 3, completed: false}).run(connection, (err, cursor) => {
             if (err) throw err
             cursor.toArray((err, result) => {
@@ -89,6 +95,56 @@ let connection = r.connect({
             return res.json(true);
         })
     })
+
+    // app.post('/createUser', (req, res) => {
+    //     r.table('users').filter(r.row('user').eq(req.body.user)).count().run(connection, (err, cursor) => {
+
+
+    //         if (cursor >= 1) {
+    //             return res.json(false);
+
+    //         } else {
+    //             bcrypt.hash(req.body.password, saltRounds).then((hash) => {
+    //                 r.table('users').insert({
+    //                     user: req.body.user,
+    //                     password: hash,
+    //                 }).run(connection, (err, cursor) => {
+    //                     if (err) throw err
+    //                     return res.json(true);
+    //                 })
+    //             })
+    //         }
+    //     });
+    // });
+
+    app.post('/proceedToLogin', (req, res) => {
+        let user = req.body.user;
+        let password = req.body.password;
+        if (!user || !password) { res.statusCode = 401; return res.json(false); }
+        // 1
+        r.table('users').filter({ 'user': user }).run(connection, (err, cursor) => {
+            if (err) throw err;
+            cursor.toArray((err, result) => {
+                if (err) throw err;
+                bcrypt.compare(password, result[0].password, function (err, response) {
+                    if (!response) { res.statusCode = 500; return res.json(err); }
+
+                    // user = result[0];
+                    let userId = result[0].id;
+                    let token = jwt.sign({
+                        // La clé publique
+                        user: user,
+                        id: userId,
+                    }, secret /** Clé secrète */, { expiresIn: '2d' });
+                    console.log(user)
+                    console.log(password)
+                    console.log(token)
+                    return res.json({ token: token, id: result[0].id});
+                });
+            })
+        })
+    })
+
 });
 
 // Run server on port 3000
