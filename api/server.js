@@ -173,7 +173,7 @@ let connection = r.connect({
 
 });
 
-// Run server on port 3000
+// Run server on port 9000
 app.listen(9000, function () {
     console.log('Listened on port 9000!')
 })
