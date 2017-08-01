@@ -47,7 +47,7 @@ class Add extends Component {
 
     addTask() {
         axios.post('http://localhost:9000/addTask', this.state.newTask).then((response) => {
-            this.props.history.push('/')
+            this.props.history.push('/todo')
         })
     }
 
@@ -93,7 +93,9 @@ class Add extends Component {
                         </SelectField>
 
                         <FlatButton
-                            backgroundColor="#a4c639"
+                            fullWidth={true}
+                            backgroundColor="#465570"
+                            style={{color: '#FFF'}}
                             onClick={() => this.addTask()}>Add</FlatButton>
                     </div>
                 </form>

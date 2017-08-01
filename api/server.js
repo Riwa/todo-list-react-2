@@ -36,7 +36,7 @@ let connection = r.connect({
     db: "tasks_manager" //your database
 }).then((connection) => {
     app.get('/todo',jwtExpress({ secret: secret }), (req, res) => {
-        r.table('tasks').filter({completed: false}).run(connection, (err, cursor) => {
+        r.table('tasks').filter({completed: false}).orderBy('created').run(connection, (err, cursor) => {
             if (err) throw err
             cursor.toArray((err, result) => {
                 if (err) throw err
@@ -155,6 +155,21 @@ let connection = r.connect({
             })
         })
     })
+
+    app.post('/changePassword', (req, res) => {
+        console.log(req.body)
+        let password = req.body.newPwd
+        let id = req.body.userId
+
+        bcrypt.hash(password, saltRounds).then((hash) => {
+            r.table('users').get(id).update({
+                password: hash,
+            }).run(connection, (err, cursor) => {
+                if (err) throw err;
+                return res.json(true);
+            })
+        })
+    });
 
 });
 

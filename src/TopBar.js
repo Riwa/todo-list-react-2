@@ -19,7 +19,9 @@ class TopBar extends Component {
         return (
             <div>
                 <AppBar
-                    title="Vos tâches"
+                    className="top-bar-bkg"
+                    style={{backgroundColor: '#465570'}}
+                    title="ZOL Tasks Manager"
                     iconElementRight={<IconButton className="top-bar-link"> <Link to="/add"><AddTaskButton color="white" /></Link></IconButton>} 
                     iconElementLeft={<IconButton className="top-bar-link" onClick={this.previousScreen}><Link to="/todo"><HomeButton color="white" /></Link></IconButton>} 
                     />

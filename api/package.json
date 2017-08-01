@@ -1,8 +1,8 @@
 {
-  "name": "appvue",
+  "name": "Zol Tasks Manager API",
   "version": "1.0.0",
-  "description": "A Vue.js project",
-  "author": "Julien",
+  "description": "w/ Node and RethinkDB",
+  "author": "Arthur Alloncle",
   "private": true,
   "scripts": {
     "dev": "nodemon server.js"

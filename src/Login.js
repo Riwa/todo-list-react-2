@@ -1,7 +1,10 @@
 import React, {Component} from 'react'
 import TextField from 'material-ui/TextField';
 import {Card, CardText, CardActions} from 'material-ui/Card'
-import RaisedButton from 'material-ui/RaisedButton'
+import FlatButton from 'material-ui/FlatButton'
+import Snackbar from 'material-ui/Snackbar'
+import './Login.css'
+import logo from './logo.png'
 import axios from 'axios'
 
 class Login extends Component {
@@ -10,6 +13,7 @@ class Login extends Component {
 
         this.state = {
             test: 1,
+            open: false,
             login: {
                 user: '',
                 password: ''
@@ -40,13 +44,23 @@ class Login extends Component {
             localStorage.setItem('userId', response.data.id)
             this.props.history.push('/todo')
         }).catch((error) => {
-            alert('NO')
+                this.setState({open: true,});
       })
     }
 
+    handleRequestClose = () => {
+        this.setState({
+        open: false,
+        });
+    };
+
     render(){
         return(
-            <div>
+            <div className="login-panel">
+                <div className="logo-login">
+                    <img src={logo} alt="logo" />
+                    <h1>Tasks Manager</h1>
+                </div>
                 <Card>
                     <CardText>
                         <TextField
@@ -65,10 +79,16 @@ class Login extends Component {
                             onChange={this.handleChangePassword}
                         />
                     </CardText>
-                    <CardActions>
-                    <RaisedButton onClick={this.proceedToLogin} label="Se connecter" primary={true} />
+                    <CardActions className="login-button">
+                    <FlatButton fullWidth={true} onClick={this.proceedToLogin} label="Se connecter" backgroundColor="#465570" style={{color: "#FFF"}}/>
                     </CardActions>
                 </Card>
+                <Snackbar
+                    open={this.state.open}
+                    message="Nom d'utilisateur et/ou mot de passe invalides"
+                    autoHideDuration={4000}
+                    onRequestClose={this.handleRequestClose}
+                />
             </div>
         )
     }
