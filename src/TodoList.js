@@ -3,6 +3,7 @@ import { List, ListItem } from 'material-ui/List';
 import ActionInfo from 'material-ui/svg-icons/action/info';
 import Subheader from 'material-ui/Subheader';
 import { Link } from 'react-router-dom'
+import CircularProgress from 'material-ui/CircularProgress';
 import axios from 'axios';
 import './TodoList.css'
 
@@ -13,7 +14,7 @@ class TodoList extends Component {
 
     const tasks = []
 
-    this.state = { tasks }
+    this.state = { tasks, load:'block' }
   }
 
 
@@ -22,12 +23,14 @@ class TodoList extends Component {
     axios.get('http://92.222.88.131:9000/todo').then((response) => {
       this.tasks = response.data;
       this.setState({ tasks: this.tasks })
+      this.setState({load: 'none'})
     })
   }
 
   render() {
     return (
       <div>
+        <CircularProgress style={{display: this.state.load}}/>
         <Subheader>Tâches en cours</Subheader>
         <List>
           {this.state.tasks.map((task) => (

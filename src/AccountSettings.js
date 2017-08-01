@@ -3,6 +3,7 @@ import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton'
 import LogoutButton from 'material-ui/svg-icons/action/power-settings-new';
+import CircularProgress from 'material-ui/CircularProgress';
 import axios from 'axios'
 import './AccountSettings.css'
 
@@ -13,6 +14,7 @@ class AccountSettings extends Component {
     this.state = {
       user: localStorage.getItem('userId'),
       loggedUser: {},
+      load:'block',
       newPassword: {
         currentPwd: '',
         newPwd: '',
@@ -42,6 +44,7 @@ class AccountSettings extends Component {
     console.log(this.state.user)
     axios.get(`http://92.222.88.131:9000/settings/${this.state.user}`).then((response) => {
       this.setState({ loggedUser: response.data[0] })
+      this.setState({load: 'none'})
     })
   }
 
@@ -61,6 +64,7 @@ class AccountSettings extends Component {
   render() {
     return (
       <div>
+        <CircularProgress style={{display: this.state.load}}/>
         <Card>
           <CardHeader
             title="Informations de l'utilisateur"

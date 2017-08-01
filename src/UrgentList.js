@@ -4,6 +4,7 @@ import ActionInfo from 'material-ui/svg-icons/action/info';
 import Subheader from 'material-ui/Subheader';
 import { Link } from 'react-router-dom'
 import axios from 'axios';
+import CircularProgress from 'material-ui/CircularProgress';
 import './UrgentList.css'
 
 class UrgentList extends Component {
@@ -12,18 +13,20 @@ class UrgentList extends Component {
 
     const tasks = []
 
-    this.state = { tasks }
+    this.state = { tasks, load:'block' }
   }
   componentDidMount() {
     axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token')
     axios.get('http://92.222.88.131:9000/urgent').then((response) => {
       this.tasks = response.data;
       this.setState({ tasks: this.tasks })
+      this.setState({load: 'none'})
     })
   }
   render() {
     return (
       <div>
+        <CircularProgress style={{display: this.state.load}}/>
         <Subheader>Tâches urgentes</Subheader>
         <List>
           {this.state.tasks.map((task) => (

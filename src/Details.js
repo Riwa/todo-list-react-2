@@ -3,6 +3,7 @@ import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
 import IconButton from 'material-ui/IconButton';
 import BackButton from 'material-ui/svg-icons/navigation/arrow-back';
 import FlatButton from 'material-ui/FlatButton';
+import CircularProgress from 'material-ui/CircularProgress';
 import axios from 'axios'
 
 class Details extends Component {
@@ -10,6 +11,7 @@ class Details extends Component {
     super(props);
 
     this.state = {
+      load:'block',
       taskId: props.match.params.id,
       taskDetails: {}
     }
@@ -19,6 +21,7 @@ class Details extends Component {
     axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token')
     axios.get(`http://92.222.88.131:9000/details/${this.state.taskId}`).then((response) => {
       this.setState({ taskDetails: response.data[0] })
+      this.setState({load: 'none'})
     })
   }
 
@@ -48,6 +51,7 @@ class Details extends Component {
   render() {
     return (
       <Card>
+        <CircularProgress style={{display: this.state.load}}/>
         <IconButton onClick={() => this.props.history.goBack()} label="Retour"><BackButton /></IconButton>
         <CardHeader
           title={this.state.taskDetails.task}
