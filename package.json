@@ -1,6 +1,7 @@
 {
   "name": "todo-2",
   "version": "0.1.0",
+  "homepage" : "http://92.222.88.131/todo-list-react-2/build",
   "private": true,
   "dependencies": {
     "axios": "^0.16.2",
