@@ -13,9 +13,9 @@ class Main extends Component {
   render() {
     return (
       <div style={{
-        paddingBottom:"70px",
+        paddingBottom:"10vh",
         boxSizing:"border-box",
-        height:"85vh",
+        height:"90vh",
         overflowX:"auto"
       }}>
         <Switch>
