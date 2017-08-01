@@ -77,7 +77,6 @@ let connection = r.connect({
 
     app.get('/settings/:userId', (req, res) => {
         let id = req.params.userId;
-        console.log(id);
         r.table('users').filter({'id': id}).run(connection, (err, cursor) => {
             if (err) throw err
                 cursor.toArray((err, result) => {
@@ -147,9 +146,6 @@ let connection = r.connect({
                         user: user,
                         id: userId,
                     }, secret /** Clé secrète */, { expiresIn: '2d' });
-                    console.log(user)
-                    console.log(password)
-                    console.log(token)
                     return res.json({ token: token, id: result[0].id});
                 });
             })
@@ -157,7 +153,6 @@ let connection = r.connect({
     })
 
     app.post('/changePassword', (req, res) => {
-        console.log(req.body)
         let password = req.body.newPwd
         let id = req.body.userId
 
