@@ -12,7 +12,12 @@ class Main extends Component {
 
   render() {
     return (
-      <div>
+      <div style={{
+        paddingBottom:"70px",
+        boxSizing:"border-box",
+        height:"85vh",
+        overflowX:"auto"
+      }}>
         <Switch>
           <Route exact path='/' component={Login} />
           <Route path='/todo' component={TodoList} />

@@ -27,7 +27,8 @@ class BottomBar extends Component {
                     <BottomNavigation
                         style={{
                             position: 'fixed',
-                            bottom: '0'
+                            bottom: '0',
+                            zIndex: 999,
                         }}
                         selectedIndex={this.state.selectedIndex}>
                         <Link to="/urgent">
