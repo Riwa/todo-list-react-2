@@ -36,7 +36,7 @@ let connection = r.connect({
     db: "tasks_manager" //your database
 }).then((connection) => {
     app.get('/todo',jwtExpress({ secret: secret }), (req, res) => {
-        r.table('tasks').filter({completed: false}).orderBy('created').run(connection, (err, cursor) => {
+        r.table('tasks').filter({completed: false}).orderBy('timestamp').run(connection, (err, cursor) => {
             if (err) throw err
             cursor.toArray((err, result) => {
                 if (err) throw err
@@ -46,7 +46,7 @@ let connection = r.connect({
     })
 
     app.get('/done',jwtExpress({ secret: secret }), (req, res) => {
-        r.table('tasks').filter({completed: true}).run(connection, (err, cursor) => {
+        r.table('tasks').filter({completed: true}).orderBy('timestamp').run(connection, (err, cursor) => {
             if (err) throw err
             cursor.toArray((err, result) => {
                 if (err) throw err
@@ -56,7 +56,7 @@ let connection = r.connect({
     })
 
     app.get('/urgent',jwtExpress({ secret: secret }), (req, res) => {
-        r.table('tasks').filter({priority: 3, completed: false}).run(connection, (err, cursor) => {
+        r.table('tasks').filter({priority: 3, completed: false}).orderBy('timestamp').run(connection, (err, cursor) => {
             if (err) throw err
             cursor.toArray((err, result) => {
                 if (err) throw err

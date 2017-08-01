@@ -18,6 +18,7 @@ class Add extends Component {
                 details: '',
                 priority: 2,
                 created: moment().format('DD / MM / YYYY'),
+                timestamp: new Date(),
                 completed: false
             }
         }
