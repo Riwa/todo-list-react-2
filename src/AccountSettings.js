@@ -40,13 +40,13 @@ class AccountSettings extends Component {
 
   componentDidMount() {
     console.log(this.state.user)
-    axios.get(`http://localhost:9000/settings/${this.state.user}`).then((response) => {
+    axios.get(`http://92.222.88.131:9000/settings/${this.state.user}`).then((response) => {
       this.setState({ loggedUser: response.data[0] })
     })
   }
 
   proceedToPasswordChange() {
-    axios.post('http://localhost:9000/changePassword', this.state.newPassword).then((response) => {
+    axios.post('http://92.222.88.131:9000/changePassword', this.state.newPassword).then((response) => {
       console.log('Password changed from' + this.state.newPassword.currentPwd + 'to' + this.state.newPassword.newPwd)
     })
   }

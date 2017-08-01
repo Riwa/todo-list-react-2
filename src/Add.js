@@ -46,7 +46,7 @@ class Add extends Component {
     }
 
     addTask() {
-        axios.post('http://localhost:9000/addTask', this.state.newTask).then((response) => {
+        axios.post('http://92.222.88.131:9000/addTask', this.state.newTask).then((response) => {
             this.props.history.push('/todo')
         })
     }

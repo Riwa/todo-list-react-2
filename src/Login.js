@@ -38,7 +38,7 @@ class Login extends Component {
     }
 
     proceedToLogin(){
-        axios.post('http://localhost:9000/proceedToLogin', this.state.login).then((response) => {
+        axios.post('http://92.222.88.131:9000/proceedToLogin', this.state.login).then((response) => {
             console.log(response)
             localStorage.setItem('token', response.data.token)
             localStorage.setItem('userId', response.data.id)

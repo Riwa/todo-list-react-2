@@ -17,20 +17,20 @@ class Details extends Component {
 
   componentDidMount() {
     axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token')
-    axios.get(`http://localhost:9000/details/${this.state.taskId}`).then((response) => {
+    axios.get(`http://92.222.88.131:9000/details/${this.state.taskId}`).then((response) => {
       this.setState({ taskDetails: response.data[0] })
     })
   }
 
   completeTask(taskId) {
-    axios.put(`http://localhost:9000/completeTask/${taskId}`).then((response) => {
+    axios.put(`http://92.222.88.131:9000/completeTask/${taskId}`).then((response) => {
       // let updateTask = Object.assign({}, this.state.taskDetails);
       this.componentDidMount();
     })
   }
 
   deleteTask(taskId) {
-    axios.delete(`http://localhost:9000/deleteTask/${taskId}`).then((response) => {
+    axios.delete(`http://92.222.88.131:9000/deleteTask/${taskId}`).then((response) => {
       this.props.history.goBack()
     })
   }
