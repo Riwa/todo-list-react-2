@@ -1,5 +1,5 @@
 {
-  "name": "Zol Tasks Manager API",
+  "name": "zol-tasks-manager-api",
   "version": "1.0.0",
   "description": "w/ Node and RethinkDB",
   "author": "Arthur Alloncle",
