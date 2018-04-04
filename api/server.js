@@ -106,26 +106,26 @@ let connection = r.connect({
         })
     })
 
-    // app.post('/createUser', (req, res) => {
-    //     r.table('users').filter(r.row('user').eq(req.body.user)).count().run(connection, (err, cursor) => {
+    app.post('/createUser', (req, res) => {
+         r.table('users').filter(r.row('user').eq(req.body.user)).count().run(connection, (err, cursor) => {
 
 
-    //         if (cursor >= 1) {
-    //             return res.json(false);
+             if (cursor >= 1) {
+                 return res.json(false);
 
-    //         } else {
-    //             bcrypt.hash(req.body.password, saltRounds).then((hash) => {
-    //                 r.table('users').insert({
-    //                     user: req.body.user,
-    //                     password: hash,
-    //                 }).run(connection, (err, cursor) => {
-    //                     if (err) throw err
-    //                     return res.json(true);
-    //                 })
-    //             })
-    //         }
-    //     });
-    // });
+             } else {
+                 bcrypt.hash(req.body.password, saltRounds).then((hash) => {
+                     r.table('users').insert({
+                         user: req.body.user,
+                         password: hash,
+                     }).run(connection, (err, cursor) => {
+                         if (err) throw err
+                         return res.json(true);
+                     })
+                 })
+             }
+         });
+     });
 
     app.post('/proceedToLogin', (req, res) => {
         let user = req.body.user;
